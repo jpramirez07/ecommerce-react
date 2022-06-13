@@ -1,0 +1,39 @@
+.productdetail-body{
+    display: flex;
+}
+
+.imgdetail{
+    height: 350px;
+    width: 300px;
+    position: absolute;
+}
+
+.imgdetail img{
+    height: 100%;
+    width: 100%;
+}
+
+.similarItems{
+    margin-top: 250px;
+}
+
+.descriptionDetail{
+    margin-left: 400px;
+}
+
+.body-detail{
+    padding: 1rem 2rem 1rem 2rem;
+}
+
+.input-quantity{
+    width: 30px;
+}
+
+.cartdetail{
+    color: #f85555;
+}
+
+.body-cardsimilar{
+    display: flex;
+    flex-wrap: wrap;
+}

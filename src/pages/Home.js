@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { filterCategories, filterProducts, getProducts } from '../store/Slices/products.slice';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import axios from "axios"
+import '../Styles/Home.css'
 
 const Home = () => {
 
@@ -32,38 +33,53 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Home</h1>
-            <h2>Categories</h2>
-            <ul>
-                {
-                        categories.map( category => (
-                            <li 
-                                style={{cursor:"pointer"}} 
-                                onClick={() => selectCategories(category.id)} 
-                                key={category.id} 
+            <form className='search'>
+                <input
+                    type="text"
+                    onChange={e => setSearch(e.target.value)}
+                    value={search}
+                />
+                <div>
+                    <button className='btn-search' onClick={filterQuery}>
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </button>
+                </div>
+            </form>
+            <div className='body-home'>
+                <div className='body-categories'>
+                    <h2>Categories</h2>
+                    <ul>
+                        {
+                            categories.map(category => (
+                                <li
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => selectCategories(category.id)}
+                                    key={category.id}
                                 >
                                     {category.name}
-                            </li>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+                <div className='body-products'>
+                    {
+                        products.map((product) => (
+                            <div className='card' key={product.id} onClick={() => navigate(`/products/${product.id}`)} style={{ cursor: "pointer" }}>
+                                <div className='body-img'>
+                                    <div className='img-container'>
+                                        <img src={product.productImgs?.[0]} alt="" />
+                                    </div>
+                                </div>
+                                <div className='description'>
+                                    <h2>{product.title}</h2>
+                                    <p>Price</p>
+                                    <p><b>$ {product.price}</b></p>
+                                </div>
+                            </div>
                         ))
-                }
-            </ul>
-            <input 
-                type="text"
-                onChange={e => setSearch(e.target.value)}
-                value={search}
-            />
-            <button onClick={filterQuery}>buscar</button>
-            <div>
-                {
-                    products.map((product) => (
-                        <div key={product.id} onClick={() => navigate(`/products/${product.id}`)} style={{cursor: "pointer"}}>
-                            <img src={product.productImgs?.[0]} alt="" /> 
-                            <h2>{product.title }</h2>
-                            <p>{product.description}</p>
-                            <p>{product.price}</p>
-                        </div>
-                    ))
-                }
+                    }
+                </div>
             </div>
         </div>
     );
